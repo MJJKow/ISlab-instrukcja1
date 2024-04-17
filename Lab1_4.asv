@@ -79,8 +79,8 @@ title("Dyskretne widmo amplitudowe dla N = 100");
 
 %SPRAWDZENIE twierdzenia Parsevala 
 %%Dla czasu:
-% parseval_t = sum(x.^2)*Tp;
-% parseval_f = sum(abs(x_fft.^2)*1/(N*Tp));
+parseval_t = sum(x.^2)*Tp;
+parseval_f = sum(abs(x_fft.^2)*1/(N*Tp));
 %%twierdzenie parsevala mówiące o możliwości obliczenia całkowitej energii
 %%niesionej przez sekwencję próbek zarówno w dziedzinie czasu jak i
 %%częstotliwości jest spełnione.
@@ -102,15 +102,11 @@ omega_k = 2*pi*(0:N-1)/N;   % kolejne prążki OMEGA
 
 %obliczenie estymatora funkcji autokorelacji
 r_xx = xcorr(e, 'unbiased');
-PHI_xx = zeros(N);                % wykres metodą korelogramową
-for k = 1:N
-    sum = 0;
-    for i = N-M_w:N+M_w
-        sum = sum + (  w_i*r_xx(i)*exp(-1i*omega_k(k)*i)  );
+PHI_xx = [];                % wykres metodą korelogramową
+for k = 0:N-1
+    sum
+    for i = -M_w:M_w
+        sum = sum + (  w_i*r_xx(i)*exp(-1i*omega_k(k)*i)  )
     end
-    PHI_xx(k) = sum*Tp;
+    ge_ko(k) = ge_ko(k)*Tp
 end
-
-figure;
-plot(omega_k, PHI_xx);
-title("Metoda korelogramowa z oknem prostokątnym");
