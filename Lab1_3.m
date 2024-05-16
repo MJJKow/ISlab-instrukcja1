@@ -1,4 +1,5 @@
 %LAB 1_3
+clear all; close all;
 
 %Zmienne
 std = sqrt(0.64);
@@ -13,6 +14,7 @@ x = sin(2*pi * 5*tn);
 y = sin(2*pi * 5*tn) + e;
 v = lsim(H, e, tn);
 
+%% KROPKA 1 - wykresy
 %Plot
 figure
 subplot(2,2,1);
@@ -33,12 +35,14 @@ subplot(2,2,4);
 plot(v);
 title('Syngal po filtracji v(n)');
 
+%% KROPKA 2
 %"OBLICZANIE estymatora funkcji autokorelacji - Ocena stopnia korelacji między kolejnymi próbkami w sygnale 
 ac_e = xcorr(e, 'unbiased');
 ac_x = xcorr(x, 'unbiased');
 ac_y = xcorr(y, 'unbiased');
 ac_v = xcorr(v, 'unbiased');
 
+%% KROPKA 3
 %"Własność W1 - symetria względem przesunięcia zerowego 
 %%Estymator obciążony dla całego zakresu 
 aco_e = xcorr(e, 'biased');
@@ -58,6 +62,7 @@ i_val = -(N-1):(N-1);
 %równa jest wariancji szumu, wartości estymatora funkcji poza argumentem=0
 % są zbliżone od 0
 
+%% KROPKA 4
 %"RÓŻNICA w przebiegu funkcji autokorelacji przy zastosowaniu estymatora
 %obciążonego i nieobciążonego 
 figure 
@@ -95,6 +100,7 @@ title('Estymator nieobciążony dla v')
 %%ODP: *Estymator nieobciążony daje większe wartości korelacji dla dużych
 %przesunięć i
 
+%% KROPKA 5
 %"ESTYMATA funkcji autokorelacji sygnału v i e
 figure;
 plot(i_val, ac_v, 'r');
@@ -106,9 +112,12 @@ legend('v(nTp)', 'e(nTp');
 %%ODP: Oba estymatory wykazują wzrost wartości wokół tych samych próbek
 %%czasu, co świadczy o ich skorelowaniu.w
 
-%"OBLICZENIE i wykreślenie estymatora funkcji korelacji wzajemnej sygnałów
+%% KROPKA 6
+%Obliczenie i wykreślenie estymatora funkcji korelacji wzajemnej sygnałów
 %y(nTp) i x(nTp).
-
+y_x_corr = xcorr(y, x, 'unbiased');
+figure;
+plot(i_val, y_x_corr);
 
 
 

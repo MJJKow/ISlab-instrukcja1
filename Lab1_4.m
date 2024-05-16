@@ -1,4 +1,4 @@
-close all;
+close all; clear all;
 %parametry
 Tp = 0.001;
 sigma = 0.8;
@@ -11,6 +11,7 @@ e = sigma*randn(1, N);
 H = tf([0.1], [1 -0.9], Tp);
 v = lsim(H, e, tn);
 
+%% KROPKA 1
 %WSZYSTKIE sygnały w dziedzinie czasu dyskretnego
 
 figure
@@ -26,6 +27,7 @@ subplot(2,2,3);
 plot(v);
 title('Szum po filtracji v(n)');
 
+%% KROPKA 2
 %OBLICZANIE widma amplitudowego sygnału x(n)
 x_fft = fft(x);
 x_fft = x_fft*Tp;
@@ -39,6 +41,7 @@ title("Dyskretne widmo amplitudowe |X_N(j*omega_k)|")
 %sinusoidlanego wejściowego. Prążki widma pojawiają się w częstotliwościach
 %odpowiadających danym sinusom wejściowym
 
+%% KROPKA 3
 %WPŁYW liczby próbek sygnału na jakość otrzymanego widma amplitudowego
 N_1 = 1000; % 100 próbek na okres
 N_2 = 200;  % 20 próbek na okres
@@ -72,19 +75,21 @@ subplot(2,2,3);
 plot(omega_3, abs(x3_fft));
 title("Dyskretne widmo amplitudowe dla N = 100");
 
-%%Im mniejsza liczba próbek, tym  mniejsza rozdzielczość częstotliwościowa.
-%Wyciek widma możemy zaobserwować dla składowych o częstotliwościach 10 i
-%30. Prążek amplitudowy rozmywa się na leżące obok częstotliwości, efekt
-%ten jest im większy im mniejsza jest liczba próbek.
+% Im mniejsza liczba próbek, tym  mniejsza rozdzielczość częstotliwościowa.
+% Wyciek widma możemy zaobserwować dla składowych o częstotliwościach 10 i
+% 30. Prążek amplitudowy rozmywa się na leżące obok częstotliwości, efekt
+% ten jest im większy im mniejsza jest liczba próbek.
 
-%SPRAWDZENIE twierdzenia Parsevala 
-%%Dla czasu:
+%% KROPKA 4
+% SPRAWDZENIE twierdzenia Parsevala 
+% %Dla czasu:
 % parseval_t = sum(x.^2)*Tp;
 % parseval_f = sum(abs(x_fft.^2)*1/(N*Tp));
-%%twierdzenie parsevala mówiące o możliwości obliczenia całkowitej energii
-%%niesionej przez sekwencję próbek zarówno w dziedzinie czasu jak i
-%%częstotliwości jest spełnione.
+% twierdzenie parsevala mówiące o możliwości obliczenia całkowitej energii
+% %niesionej przez sekwencję próbek zarówno w dziedzinie czasu jak i
+% dedczęstotliwości jest spełnione.
 
+%% KROPKA 5
 %OBLICZYĆ i wykreślić estymatę gęstości widmowej mocy. Sprawdzić jaki wpływ
 %ma wartość wariancji na estymatę gęstości.
 %%metoda bezpośrednia:
